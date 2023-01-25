@@ -1,0 +1,31 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <style type="text/css">
+        .categori > img {
+            display: flex;
+            width: 100px;
+            height: 100px;
+
+        }
+        .categories {
+            display: flex;
+            justify-content: space-between;
+            width: 20%;
+        }
+
+    </style>
+    <div class="categories">
+        {% for categori in categories %}
+            <div class="categori">
+                <img src="/media/{{ categori.icon }}" alt="">
+                <h3>
+                    <a href="/products/?categori_id={{ categori.id }}">
+                        {{ categori.name }} {{ categori.products.count }}
+                    </a>
+                </h3>
+            </div>
+            <h3>{{ categori.title }}</h3>
+        {% endfor %}
+    </div>
+{% endblock %}

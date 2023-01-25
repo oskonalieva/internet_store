@@ -3,7 +3,7 @@
 
 {% block content %}
     <style type="text/css">
-        .posts {
+        .products {
             width: 80%;
             margin-left: 10%;
             display: flex;
@@ -17,7 +17,7 @@
                     <h5 class="card-title">{{ product.title }}</h5>
                     <h5 class="card-title">{{ product.description }}</h5>
                     <h5 class="card-title">{{ product.price }}</h5>
-                    <a href="#" class="card-link">More</a>
+                    <a href="{{ product.id }}" class="card-link">More</a>
                 </div>
             </div>
         {% endfor %}
