@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from products.views import products_view, main_view, product_detail_view, categories_view
+from products.views import products_view, main_view, product_detail_view, categories_view, create_products_view
 from django.conf.urls.static import static
 from internet_store import settings
 urlpatterns = [
@@ -23,7 +23,8 @@ urlpatterns = [
     path('', main_view),
     path('products/', products_view),
     path('categories/', categories_view),
-    path('products/<int:id>/', product_detail_view)
+    path('products/<int:id>/', product_detail_view),
+    path('products/create/', create_products_view)
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

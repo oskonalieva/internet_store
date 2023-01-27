@@ -1,7 +1,7 @@
 {% extends 'layouts/index.html' %}
 
 {% block content %}
-    <style>
+    <style type="text/css">
         .image > img {
             width: 50%;
             margin-left: 25%;
@@ -47,8 +47,13 @@
 
         </div>
     </div>
-
-
+    <div class="create_view">
+        <form action="/products/{{ product.id }}/" method="post" class="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add Review">
+        </form>
+    </div>
     <div class="reviews">
         {% for review in reviews %}
             <div style="margin: 50px">
