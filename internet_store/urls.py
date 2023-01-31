@@ -18,13 +18,21 @@ from django.urls import path
 from products.views import products_view, main_view, product_detail_view, categories_view, create_products_view
 from django.conf.urls.static import static
 from internet_store import settings
+from users.views import auth_view, register_view, logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view),
     path('products/', products_view),
     path('categories/', categories_view),
     path('products/<int:id>/', product_detail_view),
-    path('products/create/', create_products_view)
+    path('products/create/', create_products_view),
+
+    #users
+    path('users/login/', auth_view),
+    path('users/register/', register_view),
+    path('users/logout/', logout_view),
+
+
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

@@ -38,7 +38,7 @@ def product_detail_view(request, **kwargs):
         }
         return render(request, 'products/detail.html', context=context)
 
-    elif request.method== 'POST':
+    elif request.method == 'POST':
         if form.is_valid():
             Review.objects.create(
                 text=form.cleaned_data.get('text'),
