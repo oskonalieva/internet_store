@@ -24,12 +24,11 @@ def products_view(request):
             search = request.GET.get('search')
             page = request.GET.get('page', 1)
             if search is not None:
-                posts = Product.objects.filter(title__icontains=search,
-                                               description__icontains=search
-                                               )
+                products = Product.objects.filter(category__name__icontains=search) or \
+                           Product.objects.filter(description__icontains=search)
             max_page = products.__len__() / PAGINATION_LIMIT
             if round(max_page) < max_page:
-                max_page = round(max_page) + 1
+                max_page = int(max_page) + 1
             products = products[PAGINATION_LIMIT * (page - 1): PAGINATION_LIMIT * page]
 
             context = {
