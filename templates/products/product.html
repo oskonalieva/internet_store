@@ -10,7 +10,11 @@
             justify-content: space-between;
         }
     </style>
+    <form action="/products" method="get">
+            <input type="text" name="search">
+            <input type="submit" value="Search">
     <div class="products">
+
         {% for product in products %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -20,6 +24,13 @@
                     <a href="{{ product.id }}" class="card-link">More</a>
                 </div>
             </div>
+        {% endfor %}
+    </div>
+    <div class="pages">
+         {% for page in max_page %}
+            <a href="/product/?page={{ page }}">
+                 <button>{{ page }}<button>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}
