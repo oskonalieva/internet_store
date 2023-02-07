@@ -15,17 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from products.views import products_view, main_view, product_detail_view, categories_view, create_products_view
+from products.views import *
 from django.conf.urls.static import static
 from internet_store import settings
 from users.views import auth_view, register_view, logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main_view),
-    path('products/', products_view),
-    path('categories/', categories_view),
-    path('products/<int:id>/', product_detail_view),
-    path('products/create/', create_products_view),
+    path('()/', MainView.as_view()),
+    path('products/', ProductsView.as_view()),
+    path('categories/', CategoriesView.as_view()),
+    path('products/<int:id>/', ProductDetail.as_view()),
+    path('products/create/', ProductCreate.as_view()),
 
     #users
     path('users/login/', auth_view),

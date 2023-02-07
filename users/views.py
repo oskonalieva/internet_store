@@ -2,20 +2,19 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from users.forms import AuthForm, RegisterForm
 from django.contrib.auth import authenticate, logout, login
-
+from django.views.generic import CreateView, RedirectView, ListView
 
 # Create your views here.
 
 
-def auth_view(request):
-    if request.method == 'GET':
-        context = {
+class AuthView(ListView, CreateView):
+    def get_context_data(self, *, object_list=None, **kwargs):
+        return {
             'form': AuthForm
         }
-        return render(request, 'users/auth.html', context=context)
 
-    if request.method == 'POST':
-        form = AuthForm(data=request.POST)
+    def post(self, request, *args, **kwargs):
+        form = AuthForm(data=self.request.POST)
 
         if form.is_valid():
 
@@ -32,15 +31,15 @@ def auth_view(request):
         return render(request, 'users/auth.html', context={'form': form})
 
 
-def register_view(request):
-    if request.method == 'GET':
-        context = {
+class RegisterView(CreateView):
+    def get_context_data(self, **kwargs):
+
+        return {
             'form': RegisterForm,
         }
-        return render(request, 'users/register.html', context=context)
 
-    if request.method == 'POST':
-        form = RegisterForm(data=request.POST)
+    def post(self, request, *args, **kwargs):
+        form = RegisterForm(data=self.request.POST)
         if form.is_valid():
             password1, password2 = form.cleaned_data.get('password1'), form.cleaned_data.get('password2')
             if password1 == password2:
@@ -57,6 +56,7 @@ def register_view(request):
         })
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('/products/')
+class LogoutView(RedirectView):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('/products/')
